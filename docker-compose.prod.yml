@@ -3,7 +3,7 @@ version: '3'
 services:
   strapi:
     container_name: strapi
-    image: tim0401/dreamer-strapi:latest
+    image: tim0401/dreamer-strapi:0.1
     environment:
       - PORT=1337
       - ADMIN_JWT_SECRET=fdc557d845496da740a345a1e5dfc04e
