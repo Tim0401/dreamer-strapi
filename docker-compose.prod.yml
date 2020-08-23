@@ -5,7 +5,7 @@ services:
     container_name: strapi
     image: tim0401/dreamer-strapi:latest
     environment:
-      - PORT=80
+      - PORT=1337
       - ADMIN_JWT_SECRET=fdc557d845496da740a345a1e5dfc04e
       - DATABASE_HOST=db
       - DATABASE_PORT=27017
@@ -14,8 +14,6 @@ services:
       - DATABASE_PASSWORD=
     ports:
       - 1337:1337
-    volumes:
-      - ./app:/srv/app
     depends_on:
       - db
 

@@ -7,7 +7,7 @@ services:
       context: ./app
       dockerfile: Dockerfile.dev
     environment:
-      - PORT=80
+      - PORT=1337
       - ADMIN_JWT_SECRET=fdc557d845496da740a345a1e5dfc04e
       - DATABASE_HOST=db
       - DATABASE_PORT=27017
@@ -17,7 +17,8 @@ services:
     ports:
       - 1337:1337
     volumes:
-      - ./app:/srv/app
+      - ./app:/strapi
+      - hoge:/strapi/node_modules
     depends_on:
       - db
 
@@ -31,3 +32,6 @@ services:
     volumes:
       - ./db:/data/db
     restart: always
+
+volumes:
+  hoge:
