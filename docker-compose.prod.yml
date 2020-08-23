@@ -3,9 +3,7 @@ version: '3'
 services:
   strapi:
     container_name: strapi
-    build:
-      context: ./app
-      dockerfile: Dockerfile
+    image: tim0401/dreamer-strapi:latest
     environment:
       - DATABASE_CLIENT=mongo
       - DATABASE_HOST=db
