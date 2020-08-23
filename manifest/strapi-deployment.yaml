@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: strapi-deployment
+  labels:
+    app: strapi-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: strapi-pod
+  template:
+    metadata:
+      labels:
+        app: strapi-pod
+    spec:
+      containers:
+      - name: strapi-container
+        image: tim0401/dreamer-strapi:0.1
+        ports:
+        - containerPort: 1337
+        env:
+        - name: PORT
+          value: "1337"
+        - name: ADMIN_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: admin-jwt-secret
+        - name: DATABASE_HOST
+          value: "mongo-sts-0.mongo-service.default.svc.cluster.local,mongo-sts-1.mongo-service.default.svc.cluster.local,mongo-sts-2.mongo-service.default.svc.cluster.local"
+        - name: DATABASE_PORT
+          value: "27017"
+        - name: DATABASE_NAME
+          value: "dreamer-strapi?replicaSet=rs0"
