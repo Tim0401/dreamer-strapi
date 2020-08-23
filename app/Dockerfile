@@ -1,13 +1,11 @@
 FROM strapi/base
 
-WORKDIR /strapi
+WORKDIR /
 
-COPY ./package.json ./
-COPY ./yarn.lock ./
+RUN git clone https://github.com/Tim0401/dreamer-strapi.git
 
+WORKDIR /dreamer-strapi/app
 RUN yarn install
-
-COPY . .
 
 ENV NODE_ENV production
 
