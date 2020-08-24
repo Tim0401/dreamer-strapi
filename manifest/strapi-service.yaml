@@ -7,4 +7,6 @@ spec:
     app: strapi-pod
   ports:
   - port: 1337
-  type: ClusterIP
+    targetPort: 1337
+    nodePort: 30000
+  type: NodePort
