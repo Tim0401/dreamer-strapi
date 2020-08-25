@@ -33,3 +33,15 @@ spec:
           value: "27017"
         - name: DATABASE_NAME
           value: "dreamer-strapi?replicaSet=rs0"
+        volumeMounts:
+        - name: strapi-pvc
+          mountPath: "/dreamer-strapi/app"
+  volumeClaimTemplates:
+  - metadata:
+      name: strapi-pvc
+    spec:
+      accessModes:
+        - "ReadWriteMany"
+      resources:
+        requests:
+          storage: 10Gi
