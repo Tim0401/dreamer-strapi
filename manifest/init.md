@@ -1,4 +1,6 @@
-mongoDB初期起動時のレプリカセット構成
+# k8s初回立ち上げ時の作業
+
+## mongoDB初期起動時のレプリカセット構成
 
 kubectl exec -it mongo-sts-0 -- /bin/bash
 mongo mongo-sts-0.mongo-svc
@@ -13,3 +15,9 @@ config = {
 
 rs.initiate(config)
 rs.status()
+
+## pv削除時の挙動変更
+
+kubectl get pv
+kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+pvcを削除するとデータが飛ぶので注意
