@@ -1,6 +1,6 @@
 mongoDB初期起動時のレプリカセット構成
 
-kubectl exec -it mongo-sts-0 -- sh
+kubectl exec -it mongo-sts-0 -- /bin/bash
 mongo mongo-sts-0.mongo-svc
 config = {
    _id : "rs0",
