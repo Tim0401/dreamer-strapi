@@ -1,3 +1,16 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: strapi-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -34,14 +47,9 @@ spec:
         - name: DATABASE_NAME
           value: "dreamer-strapi?replicaSet=rs0"
         volumeMounts:
-        - name: strapi-pvc
-          mountPath: "/dreamer-strapi/app"
-  volumeClaimTemplates:
-  - metadata:
-      name: strapi-pvc
-    spec:
-      accessModes:
-        - "ReadWriteMany"
-      resources:
-        requests:
-          storage: 10Gi
+        - name: strapi-data
+          mountPath: "/dreamer-strapi/app/public/uploads"
+      volumes:
+      - name: strapi-data
+        persistentVolumeClaim:
+          claimName: strapi-pvc
