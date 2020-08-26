@@ -41,11 +41,11 @@ spec:
               name: secret
               key: admin-jwt-secret
         - name: DATABASE_HOST
-          value: "mongo-sts-0.mongo-svc.default.svc.cluster.local:27017,mongo-sts-1.mongo-svc.default.svc.cluster.local:27017,mongo-sts-2.mongo-svc.default.svc.cluster.local"
+          value: "mongo-sts-0.mongo-svc.default.svc.cluster.local:27017,mongo-sts-1.mongo-svc.default.svc.cluster.local:27017,mongo-sts-2.mongo-svc.default.svc.cluster.local:27017/?replicaSet=rs0"
         - name: DATABASE_PORT
           value: "27017"
         - name: DATABASE_NAME
-          value: "dreamer-strapi?replicaSet=rs0"
+          value: "dreamer-strapi"
         volumeMounts:
         - name: strapi-data
           mountPath: "/dreamer-strapi/app/public/uploads"
