@@ -21,6 +21,7 @@ rs.status()
 kubectl get pv
 kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
 pvcを削除するとデータが飛ぶので注意
+バックアップとるのでどちらでもいい
 
 ## バックアップ
 
