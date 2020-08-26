@@ -21,3 +21,22 @@ rs.status()
 kubectl get pv
 kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
 pvcを削除するとデータが飛ぶので注意
+
+## バックアップ
+
+/tmp/hostpath-provisioner/strapi-pvc/
+ホストPC内で圧縮してバックアップフォルダにコピー
+
+/tmp/hostpath-provisioner/mongo-backup-pvc
+1日1回圧縮されたDBデータが入るのでバックアップフォルダに移動
+
+## mongoのレプリカ数変更時の処理
+
+* mongo-statefulset.yamlでのレプリカ数変更
+* mongoコンテナ内でレプリカセットの構成変更
+* strapi-deployment.yaml/mongo-backup-job.yamlでのホスト名変更
+
+## image/manifestの更新
+
+適用したら更新される。
+イメージタグを変えれば新しいものを使ってくれる。

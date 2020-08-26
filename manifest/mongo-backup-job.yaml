@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-backup-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mongo-backup
+spec:
+  template:
+    spec:
+      containers:
+      - image: mongo:4.4
+        name: mongo-backup
+        volumeMounts:
+        - name: mongo-backup-data
+          mountPath: /mongo-backup
+        command: ["mongodump"]
+        args: [
+          "--uri=mongodb://mongo-sts-0.mongo-svc.default.svc.cluster.local:27017,mongo-sts-1.mongo-svc.default.svc.cluster.local:27017,mongo-sts-2.mongo-svc.default.svc.cluster.local:27017/?replicaSet=rs0",
+          "--out=/mongo-backup"]
+      restartPolicy: Never
+      volumes:
+      - name: mongo-backup-data
+        persistentVolumeClaim:
+          claimName: mongo-backup-pvc
+  backoffLimit: 4
