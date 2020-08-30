@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: strapi-container
-        image: tim0401/dreamer-strapi:0.3
+        image: tim0401/dreamer-strapi:0.3.1
         ports:
         - containerPort: 1337
         env:
