@@ -13,8 +13,8 @@
       "type": "string"
     },
     "articles": {
-      "collection": "article",
-      "via": "category"
+      "via": "category",
+      "collection": "article"
     }
   }
 }

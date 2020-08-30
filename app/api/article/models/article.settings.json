@@ -33,12 +33,12 @@
       "required": true
     },
     "tags": {
-      "via": "articles",
-      "collection": "tag"
+      "collection": "tag",
+      "via": "articles"
     },
     "category": {
-      "via": "articles",
-      "model": "category"
+      "model": "category",
+      "via": "articles"
     }
   }
 }

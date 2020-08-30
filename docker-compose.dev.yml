@@ -31,5 +31,15 @@ services:
       - ./db:/data/db
     restart: always
 
+  webhook:
+    container_name: webhook
+    build:
+      context: ../dreamer-strapi-webhook
+      dockerfile: Dockerfile.dev
+    env_file:
+     - .env
+    ports:
+      - ${PORT}:${PORT}
+
 volumes:
   hoge:
