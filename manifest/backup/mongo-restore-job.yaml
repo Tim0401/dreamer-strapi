@@ -9,7 +9,7 @@ spec:
     requests:
       storage: 10Gi
 ---
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: Job
 metadata:
   name: mongo-restore
@@ -27,6 +27,7 @@ spec:
           "--uri=mongodb://mongo-sts-0.mongo-svc.default.svc.cluster.local:27017,mongo-sts-1.mongo-svc.default.svc.cluster.local:27017,mongo-sts-2.mongo-svc.default.svc.cluster.local:27017/?replicaSet=rs0",
           "--drop",
           "/mongo-restore"]
+      restartPolicy: Never
       volumes:
       - name: mongo-restore-data
         persistentVolumeClaim:
