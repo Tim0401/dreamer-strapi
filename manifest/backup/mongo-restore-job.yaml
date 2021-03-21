@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-restore-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: batch/v1beta1
+kind: Job
+metadata:
+  name: mongo-restore
+spec:
+  template:
+    spec:
+      containers:
+      - image: mongo:4.4
+        name: mongo-restore
+        volumeMounts:
+        - name: mongo-restore-data
+          mountPath: /mongo-restore
+        command: ["mongorestore"]
+        args: [
+          "--uri=mongodb://mongo-sts-0.mongo-svc.default.svc.cluster.local:27017,mongo-sts-1.mongo-svc.default.svc.cluster.local:27017,mongo-sts-2.mongo-svc.default.svc.cluster.local:27017/?replicaSet=rs0",
+          "--drop",
+          "/mongo-restore"]
+      volumes:
+      - name: mongo-restore-data
+        persistentVolumeClaim:
+          claimName: mongo-restore-pvc
