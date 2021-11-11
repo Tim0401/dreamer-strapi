@@ -9,12 +9,12 @@ spec:
     requests:
       storage: 10Gi
 ---
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: mongo-backup
 spec:
-  schedule: "0 4 * * *"
+  schedule: "CRON_TZ=Asia/Tokyo 0 4 * * *"
   jobTemplate:
     spec:
       template:

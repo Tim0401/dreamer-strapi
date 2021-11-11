@@ -6,7 +6,7 @@ mkdir -p ~/backup/strapi
 
 NOW=`date '+%Y%m%d%H%M%S'`
 
-cd /tmp/hostpath-provisioner
+cd /tmp/hostpath-provisioner/default
 
 zip -r ~/backup/mongo/${NOW}.zip mongo-backup-pvc
 zip -r ~/backup/strapi/${NOW}.zip strapi-pvc
