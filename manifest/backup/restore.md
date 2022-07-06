@@ -9,7 +9,7 @@ sudo minikube start
 ## mongoDBのレプリカセット構成
 
 ```
-kubectl exec -it mongo-sts-0 -- /bin/bash
+sudo kubectl exec -it mongo-sts-0 -- /bin/bash
 mongo mongo-sts-0.mongo-svc
 config = {
    _id : "rs0",
@@ -35,18 +35,26 @@ sudo kubectl get pods
 ~/backup以下の最新zipファイルを  
 
 ```
-/tmp/hostpath-provisioner/strapi-pvc/
-/tmp/hostpath-provisioner/mongo-restore-pvc/
+/tmp/hostpath-provisioner/default/strapi-pvc/
+/tmp/hostpath-provisioner/default/mongo-restore-pvc/
 ```
 
 に解凍。(unzipコマンドでOK)  
+
+コマンド
+```bash
+sudo mkdir /tmp/hostpath-provisioner/default/mongo-restore-pvc/
+sudo unzip ~/backup/mongo/${TIMESTAMP}.zip -d /tmp/hostpath-provisioner/default/mongo-restore-pvc/
+sudo mv /tmp/hostpath-provisioner/default/mongo-restore-pvc/mongo-backup-pvc/* /tmp/hostpath-provisioner/default/mongo-restore-pvc/
+sudo unzip ~/backup/strapi/${TIMESTAMP}.zip -d /tmp/hostpath-provisioner/default/
+```
 
 ## mongoDB リストア
 
 ```
 sudo kubectl get job
 sudo kubectl delete job mongo-restore
-sudo kubectl apply -f mongo-restore-job.yaml
+sudo kubectl apply -f ~/dreamer-strapi/manifest/backup/mongo-restore-job.yaml
 ```
 
 終了。  
