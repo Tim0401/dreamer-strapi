@@ -6,11 +6,11 @@ Strapi+MongoDBをk8s上で動かす。
 
 ## 運用中
 
-https://dreamer.cyou/  
+https://ak41.net
 
 ## 構築ログ
-https://dreamer.cyou/pages/5f5dd4925f91a4001cb4dc29  
-https://dreamer.cyou/articles/5f4d043e1f238b001c662140  
+https://ak41.net/pages/5f5dd4925f91a4001cb4dc29  
+https://ak41.net/articles/5f4d043e1f238b001c662140  
 
 ## 同時に運用しているリポジトリ
 
